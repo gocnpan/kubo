@@ -7,7 +7,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/ipfs/kubo/core/coreiface/options"
+	"github.com/gocnpan/kubo/core/coreiface/options"
 	"github.com/libp2p/go-libp2p/core/crypto"
 	"github.com/libp2p/go-libp2p/core/peer"
 )
@@ -64,11 +64,12 @@ func InitWithIdentity(identity Identity) (*Config, error) {
 		},
 
 		Gateway: Gateway{
-			RootRedirect: "",
-			NoFetch:      false,
-			PathPrefixes: []string{},
-			HTTPHeaders:  map[string][]string{},
-			APICommands:  []string{},
+			FileRateLimitation: "500 MB",
+			RootRedirect:       "",
+			NoFetch:            false,
+			PathPrefixes:       []string{},
+			HTTPHeaders:        map[string][]string{},
+			APICommands:        []string{},
 		},
 		Reprovider: Reprovider{
 			Interval: nil,

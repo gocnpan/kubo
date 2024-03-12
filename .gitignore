@@ -21,8 +21,11 @@ bin/tmp
 bin/gocovmerge
 bin/cover
 
+cmd/ipfs/ipfs
+cmd/ipfs/ipfs.exe
 
-vendor
+vendor/
+
 .tarball
 go-ipfs-source.tar.gz
 docs/examples/go-ipfs-as-a-library/example-folder/Qm*

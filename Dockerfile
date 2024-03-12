@@ -6,8 +6,9 @@ ENV SRC_DIR /kubo
 
 # Download packages first so they can be cached.
 COPY go.mod go.sum $SRC_DIR/
-RUN cd $SRC_DIR \
-  && go mod download
+# RUN cd $SRC_DIR \
+#   && go mod download
+RUN cd $SRC_DIR
 
 COPY . $SRC_DIR
 
@@ -28,6 +29,9 @@ RUN cd $SRC_DIR \
 # and we want to make sure the libraries we're using are compatible. That's also
 # why we're running this for the target platform.
 FROM debian:stable-slim AS utilities
+
+# 替换国内镜像源
+
 RUN set -eux; \
 	apt-get update; \
 	apt-get install -y \
@@ -44,7 +48,7 @@ RUN set -eux; \
 	rm -rf /var/lib/apt/lists/*
 
 # Now comes the actual target image, which aims to be as small as possible.
-FROM busybox:stable-glibc
+FROM busybox:1.36.1-glibc
 
 # Get the ipfs binary, entrypoint script, and TLS CAs from the build container.
 ENV SRC_DIR /kubo

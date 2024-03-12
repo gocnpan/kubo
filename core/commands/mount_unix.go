@@ -7,12 +7,12 @@ import (
 	"fmt"
 	"io"
 
-	oldcmds "github.com/ipfs/kubo/commands"
-	cmdenv "github.com/ipfs/kubo/core/commands/cmdenv"
-	nodeMount "github.com/ipfs/kubo/fuse/node"
+	oldcmds "github.com/gocnpan/kubo/commands"
+	cmdenv "github.com/gocnpan/kubo/core/commands/cmdenv"
+	nodeMount "github.com/gocnpan/kubo/fuse/node"
 
+	config "github.com/gocnpan/kubo/config"
 	cmds "github.com/ipfs/go-ipfs-cmds"
-	config "github.com/ipfs/kubo/config"
 )
 
 const (

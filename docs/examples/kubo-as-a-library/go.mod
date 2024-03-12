@@ -1,14 +1,14 @@
-module github.com/ipfs/kubo/examples/kubo-as-a-library
+module github.com/gocnpan/kubo/examples/kubo-as-a-library
 
 go 1.20
 
 // Used to keep this in sync with the current version of kubo. You should remove
 // this if you copy this example.
-replace github.com/ipfs/kubo => ./../../..
+replace github.com/gocnpan/kubo => ./../../..
 
 require (
 	github.com/ipfs/boxo v0.16.0
-	github.com/ipfs/kubo v0.0.0-00010101000000-000000000000
+	github.com/gocnpan/kubo v0.0.0-00010101000000-000000000000
 	github.com/libp2p/go-libp2p v0.32.2
 	github.com/multiformats/go-multiaddr v0.12.0
 )

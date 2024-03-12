@@ -3,9 +3,9 @@ package fxtest
 import (
 	"os"
 
+	"github.com/gocnpan/kubo/core"
+	"github.com/gocnpan/kubo/plugin"
 	logging "github.com/ipfs/go-log"
-	"github.com/ipfs/kubo/core"
-	"github.com/ipfs/kubo/plugin"
 	"go.uber.org/fx"
 )
 

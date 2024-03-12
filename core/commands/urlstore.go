@@ -5,12 +5,12 @@ import (
 	"io"
 	"net/url"
 
+	cmdenv "github.com/gocnpan/kubo/core/commands/cmdenv"
 	filestore "github.com/ipfs/boxo/filestore"
-	cmdenv "github.com/ipfs/kubo/core/commands/cmdenv"
 
+	"github.com/gocnpan/kubo/core/coreiface/options"
 	"github.com/ipfs/boxo/files"
 	cmds "github.com/ipfs/go-ipfs-cmds"
-	"github.com/ipfs/kubo/core/coreiface/options"
 )
 
 var urlStoreCmd = &cmds.Command{

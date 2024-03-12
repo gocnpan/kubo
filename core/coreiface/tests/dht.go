@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	iface "github.com/ipfs/kubo/core/coreiface"
-	"github.com/ipfs/kubo/core/coreiface/options"
+	iface "github.com/gocnpan/kubo/core/coreiface"
+	"github.com/gocnpan/kubo/core/coreiface/options"
 )
 
 func (tp *TestSuite) TestDht(t *testing.T) {

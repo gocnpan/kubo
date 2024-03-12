@@ -11,9 +11,10 @@ import (
 	"strings"
 
 	humanize "github.com/dustin/go-humanize"
-	"github.com/ipfs/kubo/core"
-	"github.com/ipfs/kubo/core/commands/cmdenv"
+	"github.com/gocnpan/kubo/core"
+	"github.com/gocnpan/kubo/core/commands/cmdenv"
 
+	iface "github.com/gocnpan/kubo/core/coreiface"
 	bservice "github.com/ipfs/boxo/blockservice"
 	offline "github.com/ipfs/boxo/exchange/offline"
 	dag "github.com/ipfs/boxo/ipld/merkledag"
@@ -25,7 +26,6 @@ import (
 	cmds "github.com/ipfs/go-ipfs-cmds"
 	ipld "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log"
-	iface "github.com/ipfs/kubo/core/coreiface"
 	mh "github.com/multiformats/go-multihash"
 )
 

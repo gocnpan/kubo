@@ -9,19 +9,20 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/dustin/go-humanize"
+	"github.com/gocnpan/boxo/gateway"
+	version "github.com/gocnpan/kubo"
+	"github.com/gocnpan/kubo/config"
+	"github.com/gocnpan/kubo/core"
+	iface "github.com/gocnpan/kubo/core/coreiface"
+	"github.com/gocnpan/kubo/core/node"
 	"github.com/ipfs/boxo/blockservice"
 	"github.com/ipfs/boxo/exchange/offline"
 	"github.com/ipfs/boxo/files"
-	"github.com/ipfs/boxo/gateway"
 	"github.com/ipfs/boxo/namesys"
 	"github.com/ipfs/boxo/path"
 	offlineroute "github.com/ipfs/boxo/routing/offline"
 	"github.com/ipfs/go-cid"
-	version "github.com/ipfs/kubo"
-	"github.com/ipfs/kubo/config"
-	"github.com/ipfs/kubo/core"
-	iface "github.com/ipfs/kubo/core/coreiface"
-	"github.com/ipfs/kubo/core/node"
 	"github.com/libp2p/go-libp2p/core/routing"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
@@ -235,8 +236,18 @@ var defaultKnownGateways = map[string]*gateway.PublicGateway{
 	"localhost": subdomainGatewaySpec,
 }
 
+// getGatewayConfig 网关配置转换
+// 从配置通用配置转换到专有配置
 func getGatewayConfig(n *core.IpfsNode) (gateway.Config, error) {
 	cfg, err := n.Repo.Config()
+	if err != nil {
+		return gateway.Config{}, err
+	}
+
+	if cfg.Gateway.FileRateLimitation == "" {
+		cfg.Gateway.FileRateLimitation = "500 MB"
+	}
+	_, err = humanize.ParseBytes(cfg.Gateway.FileRateLimitation)
 	if err != nil {
 		return gateway.Config{}, err
 	}
@@ -250,6 +261,7 @@ func getGatewayConfig(n *core.IpfsNode) (gateway.Config, error) {
 
 	// Initialize gateway configuration, with empty PublicGateways, handled after.
 	gwCfg := gateway.Config{
+		FileRateLimitation:    cfg.Gateway.FileRateLimitation,
 		Headers:               headers,
 		DeserializedResponses: cfg.Gateway.DeserializedResponses.WithDefault(config.DefaultDeserializedResponses),
 		DisableHTMLErrors:     cfg.Gateway.DisableHTMLErrors.WithDefault(config.DefaultDisableHTMLErrors),

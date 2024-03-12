@@ -9,13 +9,13 @@ import (
 	"strconv"
 	"strings"
 
+	version "github.com/gocnpan/kubo"
+	oldcmds "github.com/gocnpan/kubo/commands"
+	config "github.com/gocnpan/kubo/config"
+	"github.com/gocnpan/kubo/core"
+	corecommands "github.com/gocnpan/kubo/core/commands"
 	cmds "github.com/ipfs/go-ipfs-cmds"
 	cmdsHttp "github.com/ipfs/go-ipfs-cmds/http"
-	version "github.com/ipfs/kubo"
-	oldcmds "github.com/ipfs/kubo/commands"
-	config "github.com/ipfs/kubo/config"
-	"github.com/ipfs/kubo/core"
-	corecommands "github.com/ipfs/kubo/core/commands"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
 

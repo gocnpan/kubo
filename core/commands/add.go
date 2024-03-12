@@ -8,16 +8,16 @@ import (
 	gopath "path"
 	"strings"
 
-	"github.com/ipfs/kubo/core/commands/cmdenv"
+	"github.com/gocnpan/kubo/core/commands/cmdenv"
 
 	"github.com/cheggaaa/pb"
+	coreiface "github.com/gocnpan/kubo/core/coreiface"
+	"github.com/gocnpan/kubo/core/coreiface/options"
 	"github.com/ipfs/boxo/files"
 	mfs "github.com/ipfs/boxo/mfs"
 	"github.com/ipfs/boxo/path"
 	cmds "github.com/ipfs/go-ipfs-cmds"
 	ipld "github.com/ipfs/go-ipld-format"
-	coreiface "github.com/ipfs/kubo/core/coreiface"
-	"github.com/ipfs/kubo/core/coreiface/options"
 	mh "github.com/multiformats/go-multihash"
 )
 

@@ -1,4 +1,4 @@
-module github.com/ipfs/kubo
+module github.com/gocnpan/kubo
 
 require (
 	bazil.org/fuse v0.0.0-20200117225306-7b5117fecadc
@@ -13,6 +13,7 @@ require (
 	github.com/elgris/jsondiff v0.0.0-20160530203242-765b5c24c302
 	github.com/facebookgo/atomicfile v0.0.0-20151019160806-2de1f203e7d5
 	github.com/fsnotify/fsnotify v1.6.0
+	github.com/gocnpan/boxo v0.16.3
 	github.com/google/uuid v1.4.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/ipfs-shipyard/nopfs v0.0.12-0.20231027223058-cde3b5ba964c
@@ -146,6 +147,7 @@ require (
 	github.com/ipfs/go-peertaskqueue v0.8.1 // indirect
 	github.com/ipfs/go-verifcid v0.0.2 // indirect
 	github.com/jackpal/go-nat-pmp v1.0.2 // indirect
+	github.com/juju/ratelimit v1.0.2 // indirect
 	github.com/klauspost/compress v1.17.2 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.6 // indirect
 	github.com/koron/go-ssdp v0.0.4 // indirect

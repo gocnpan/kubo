@@ -1,8 +1,8 @@
-module github.com/ipfs/kubo/test/dependencies
+module github.com/gocnpan/kubo/test/dependencies
 
 go 1.20
 
-replace github.com/ipfs/kubo => ../../
+replace github.com/gocnpan/kubo => ../../
 
 require (
 	github.com/Kubuxu/gocovmerge v0.0.0-20161216165753-7ecaa51963cd
@@ -112,7 +112,7 @@ require (
 	github.com/ipfs/go-ipld-legacy v0.2.1 // indirect
 	github.com/ipfs/go-log/v2 v2.5.1 // indirect
 	github.com/ipfs/go-metrics-interface v0.0.1 // indirect
-	github.com/ipfs/kubo v0.16.0 // indirect
+	github.com/gocnpan/kubo v0.16.0 // indirect
 	github.com/ipld/go-codec-dagpb v1.6.0 // indirect
 	github.com/ipld/go-ipld-prime v0.21.0 // indirect
 	github.com/jbenet/goprocess v0.1.4 // indirect

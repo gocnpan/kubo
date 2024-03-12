@@ -14,9 +14,9 @@ import (
 	"sync"
 	"testing"
 
+	coreiface "github.com/gocnpan/kubo/core/coreiface"
+	"github.com/gocnpan/kubo/core/coreiface/options"
 	"github.com/ipfs/boxo/path"
-	coreiface "github.com/ipfs/kubo/core/coreiface"
-	"github.com/ipfs/kubo/core/coreiface/options"
 
 	"github.com/ipfs/boxo/files"
 	mdag "github.com/ipfs/boxo/ipld/merkledag"

@@ -5,8 +5,8 @@ import (
 	"errors"
 	"strings"
 
-	coreiface "github.com/ipfs/kubo/core/coreiface"
-	caopts "github.com/ipfs/kubo/core/coreiface/options"
+	coreiface "github.com/gocnpan/kubo/core/coreiface"
+	caopts "github.com/gocnpan/kubo/core/coreiface/options"
 	peer "github.com/libp2p/go-libp2p/core/peer"
 )
 
