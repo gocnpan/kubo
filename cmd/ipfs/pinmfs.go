@@ -14,8 +14,8 @@ import (
 	ipld "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log"
 
-	config "github.com/ipfs/kubo/config"
-	"github.com/ipfs/kubo/core"
+	config "github.com/gocnpan/kubo/config"
+	"github.com/gocnpan/kubo/core"
 )
 
 // mfslog is the logger for remote mfs pinning.

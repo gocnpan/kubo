@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/ipfs/kubo/profile"
+	"github.com/gocnpan/kubo/profile"
 )
 
 func init() {
