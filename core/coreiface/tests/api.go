@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	coreiface "github.com/gocnpan/kubo/core/coreiface"
+	coreiface "github.com/ipfs/kubo/core/coreiface"
 )
 
 var errAPINotImplemented = errors.New("api not implemented")
@@ -75,7 +75,6 @@ func TestApi(p Provider) func(t *testing.T) {
 	return func(t *testing.T) {
 		t.Run("Block", tp.TestBlock)
 		t.Run("Dag", tp.TestDag)
-		t.Run("Dht", tp.TestDht)
 		t.Run("Key", tp.TestKey)
 		t.Run("Name", tp.TestName)
 		t.Run("Object", tp.TestObject)

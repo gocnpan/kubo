@@ -5,13 +5,16 @@ import (
 
 	"github.com/ipfs/boxo/path"
 
-	"github.com/gocnpan/kubo/core/coreiface/options"
+	"github.com/ipfs/kubo/core/coreiface/options"
 )
 
 // Pin holds information about pinned resource
 type Pin interface {
 	// Path to the pinned object
 	Path() path.ImmutablePath
+
+	// Name is the name of the pin.
+	Name() string
 
 	// Type of the pin
 	Type() string

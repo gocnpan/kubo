@@ -9,13 +9,13 @@ import (
 	"strconv"
 	"strings"
 
-	version "github.com/gocnpan/kubo"
-	oldcmds "github.com/gocnpan/kubo/commands"
-	config "github.com/gocnpan/kubo/config"
-	"github.com/gocnpan/kubo/core"
-	corecommands "github.com/gocnpan/kubo/core/commands"
 	cmds "github.com/ipfs/go-ipfs-cmds"
 	cmdsHttp "github.com/ipfs/go-ipfs-cmds/http"
+	version "github.com/ipfs/kubo"
+	oldcmds "github.com/ipfs/kubo/commands"
+	config "github.com/ipfs/kubo/config"
+	"github.com/ipfs/kubo/core"
+	corecommands "github.com/ipfs/kubo/core/commands"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
 
@@ -121,14 +121,10 @@ func patchCORSVars(c *cmdsHttp.ServerConfig, addr net.Addr) {
 	c.SetAllowedOrigins(newOrigins...)
 }
 
-func commandsOption(cctx oldcmds.Context, command *cmds.Command, allowGet bool) ServeOption {
+func commandsOption(cctx oldcmds.Context, command *cmds.Command) ServeOption {
 	return func(n *core.IpfsNode, l net.Listener, mux *http.ServeMux) (*http.ServeMux, error) {
 		cfg := cmdsHttp.NewServerConfig()
-		cfg.AllowGet = allowGet
 		corsAllowedMethods := []string{http.MethodPost}
-		if allowGet {
-			corsAllowedMethods = append(corsAllowedMethods, http.MethodGet)
-		}
 
 		cfg.SetAllowedMethods(corsAllowedMethods...)
 		cfg.APIPath = APIPath
@@ -203,13 +199,7 @@ func withAuthSecrets(authorizations map[string]rpcAuthScopeWithUser, next http.H
 // CommandsOption constructs a ServerOption for hooking the commands into the
 // HTTP server. It will NOT allow GET requests.
 func CommandsOption(cctx oldcmds.Context) ServeOption {
-	return commandsOption(cctx, corecommands.Root, false)
-}
-
-// CommandsROOption constructs a ServerOption for hooking the read-only commands
-// into the HTTP server. It will allow GET requests.
-func CommandsROOption(cctx oldcmds.Context) ServeOption {
-	return commandsOption(cctx, corecommands.RootRO, true)
+	return commandsOption(cctx, corecommands.Root)
 }
 
 // CheckVersionOption returns a ServeOption that checks whether the client ipfs version matches. Does nothing when the user agent string does not contain `/kubo/` or `/go-ipfs/`

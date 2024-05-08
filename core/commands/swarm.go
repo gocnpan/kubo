@@ -14,12 +14,12 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"github.com/gocnpan/kubo/commands"
-	"github.com/gocnpan/kubo/config"
-	"github.com/gocnpan/kubo/core/commands/cmdenv"
-	"github.com/gocnpan/kubo/core/node/libp2p"
-	"github.com/gocnpan/kubo/repo"
-	"github.com/gocnpan/kubo/repo/fsrepo"
+	"github.com/ipfs/kubo/commands"
+	"github.com/ipfs/kubo/config"
+	"github.com/ipfs/kubo/core/commands/cmdenv"
+	"github.com/ipfs/kubo/core/node/libp2p"
+	"github.com/ipfs/kubo/repo"
+	"github.com/ipfs/kubo/repo/fsrepo"
 
 	cmds "github.com/ipfs/go-ipfs-cmds"
 	ic "github.com/libp2p/go-libp2p/core/crypto"

@@ -6,9 +6,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gocnpan/kubo/config"
-	irouting "github.com/gocnpan/kubo/routing"
 	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/kubo/config"
+	irouting "github.com/ipfs/kubo/routing"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 	dual "github.com/libp2p/go-libp2p-kad-dht/dual"
 	record "github.com/libp2p/go-libp2p-record"
@@ -26,13 +26,14 @@ type RoutingOptionArgs struct {
 	BootstrapPeers                []peer.AddrInfo
 	OptimisticProvide             bool
 	OptimisticProvideJobsPoolSize int
+	LoopbackAddressesOnLanDHT     bool
 }
 
 type RoutingOption func(args RoutingOptionArgs) (routing.Routing, error)
 
 // Default HTTP routers used in parallel to DHT when Routing.Type = "auto"
 var defaultHTTPRouters = []string{
-	"https://cid.contact", // https://github.com/gocnpan/kubo/issues/9422#issuecomment-1338142084
+	"https://cid.contact", // https://github.com/ipfs/kubo/issues/9422#issuecomment-1338142084
 	// TODO: add an independent router from Cloudflare
 }
 
@@ -62,8 +63,8 @@ func constructDefaultHTTPRouters(cfg *config.Config) ([]*routinghelpers.Parallel
 
 		routers = append(routers, &routinghelpers.ParallelRouter{
 			Router:                  r,
-			IgnoreError:             true,             // https://github.com/gocnpan/kubo/pull/9475#discussion_r1042507387
-			Timeout:                 15 * time.Second, // 5x server value from https://github.com/gocnpan/kubo/pull/9475#discussion_r1042428529
+			IgnoreError:             true,             // https://github.com/ipfs/kubo/pull/9475#discussion_r1042507387
+			Timeout:                 15 * time.Second, // 5x server value from https://github.com/ipfs/kubo/pull/9475#discussion_r1042428529
 			DoNotWaitForSearchValue: true,
 			ExecuteAfter:            0,
 		})
@@ -116,10 +117,18 @@ func constructDHTRouting(mode dht.ModeOpt) RoutingOption {
 		if args.OptimisticProvideJobsPoolSize != 0 {
 			dhtOpts = append(dhtOpts, dht.OptimisticProvideJobsPoolSize(args.OptimisticProvideJobsPoolSize))
 		}
+		wanOptions := []dht.Option{
+			dht.BootstrapPeers(args.BootstrapPeers...),
+		}
+		lanOptions := []dht.Option{}
+		if args.LoopbackAddressesOnLanDHT {
+			lanOptions = append(lanOptions, dht.AddressFilter(nil))
+		}
 		return dual.New(
 			args.Ctx, args.Host,
 			dual.DHTOption(dhtOpts...),
-			dual.WanDHTOption(dht.BootstrapPeers(args.BootstrapPeers...)),
+			dual.WanDHTOption(wanOptions...),
+			dual.LanDHTOption(lanOptions...),
 		)
 	}
 }

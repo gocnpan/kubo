@@ -1,4 +1,4 @@
-package main
+package kubo
 
 import (
 	"context"
@@ -8,14 +8,14 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/gocnpan/kubo/core"
-	"github.com/gocnpan/kubo/core/coreapi"
-	coreiface "github.com/gocnpan/kubo/core/coreiface"
-	"github.com/gocnpan/kubo/core/coreiface/options"
-	"github.com/gocnpan/kubo/repo/fsrepo/migrations"
-	"github.com/gocnpan/kubo/repo/fsrepo/migrations/ipfsfetcher"
 	"github.com/ipfs/boxo/files"
 	"github.com/ipfs/boxo/path"
+	"github.com/ipfs/kubo/core"
+	"github.com/ipfs/kubo/core/coreapi"
+	coreiface "github.com/ipfs/kubo/core/coreiface"
+	"github.com/ipfs/kubo/core/coreiface/options"
+	"github.com/ipfs/kubo/repo/fsrepo/migrations"
+	"github.com/ipfs/kubo/repo/fsrepo/migrations/ipfsfetcher"
 	"github.com/libp2p/go-libp2p/core/peer"
 )
 
@@ -36,7 +36,7 @@ func addMigrations(ctx context.Context, node *core.IpfsNode, fetcher migrations.
 			if err != nil {
 				return err
 			}
-		case *migrations.HttpFetcher, *migrations.RetryFetcher: // https://github.com/gocnpan/kubo/issues/8780
+		case *migrations.HttpFetcher, *migrations.RetryFetcher: // https://github.com/ipfs/kubo/issues/8780
 			// Add the downloaded migration files directly
 			if migrations.DownloadDirectory != "" {
 				var paths []string

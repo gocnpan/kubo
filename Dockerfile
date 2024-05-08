@@ -1,4 +1,4 @@
-FROM --platform=${BUILDPLATFORM:-linux/amd64} golang:1.21 AS builder
+FROM --platform=${BUILDPLATFORM:-linux/amd64} golang:1.22 AS builder
 
 ARG TARGETOS TARGETARCH
 
@@ -8,7 +8,6 @@ ENV SRC_DIR /kubo
 COPY go.mod go.sum $SRC_DIR/
 # RUN cd $SRC_DIR \
 #   && go mod download
-RUN cd $SRC_DIR
 
 COPY . $SRC_DIR
 
@@ -29,9 +28,6 @@ RUN cd $SRC_DIR \
 # and we want to make sure the libraries we're using are compatible. That's also
 # why we're running this for the target platform.
 FROM debian:stable-slim AS utilities
-
-# 替换国内镜像源
-
 RUN set -eux; \
 	apt-get update; \
 	apt-get install -y \

@@ -8,10 +8,10 @@ import (
 
 	"github.com/ipfs/boxo/files"
 
-	cmdenv "github.com/gocnpan/kubo/core/commands/cmdenv"
-	"github.com/gocnpan/kubo/core/commands/cmdutils"
+	cmdenv "github.com/ipfs/kubo/core/commands/cmdenv"
+	"github.com/ipfs/kubo/core/commands/cmdutils"
 
-	options "github.com/gocnpan/kubo/core/coreiface/options"
+	options "github.com/ipfs/kubo/core/coreiface/options"
 
 	cmds "github.com/ipfs/go-ipfs-cmds"
 	mh "github.com/multiformats/go-multihash"

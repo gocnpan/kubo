@@ -1,9 +1,9 @@
-package main
+package kubo
 
 import (
 	"net/http"
 
-	"github.com/gocnpan/kubo/profile"
+	"github.com/ipfs/kubo/profile"
 )
 
 func init() {

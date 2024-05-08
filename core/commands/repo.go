@@ -11,12 +11,12 @@ import (
 	"sync"
 	"text/tabwriter"
 
-	oldcmds "github.com/gocnpan/kubo/commands"
-	cmdenv "github.com/gocnpan/kubo/core/commands/cmdenv"
-	corerepo "github.com/gocnpan/kubo/core/corerepo"
-	fsrepo "github.com/gocnpan/kubo/repo/fsrepo"
-	"github.com/gocnpan/kubo/repo/fsrepo/migrations"
-	"github.com/gocnpan/kubo/repo/fsrepo/migrations/ipfsfetcher"
+	oldcmds "github.com/ipfs/kubo/commands"
+	cmdenv "github.com/ipfs/kubo/core/commands/cmdenv"
+	corerepo "github.com/ipfs/kubo/core/corerepo"
+	fsrepo "github.com/ipfs/kubo/repo/fsrepo"
+	"github.com/ipfs/kubo/repo/fsrepo/migrations"
+	"github.com/ipfs/kubo/repo/fsrepo/migrations/ipfsfetcher"
 
 	humanize "github.com/dustin/go-humanize"
 	bstore "github.com/ipfs/boxo/blockstore"
@@ -39,7 +39,6 @@ var RepoCmd = &cmds.Command{
 	Subcommands: map[string]*cmds.Command{
 		"stat":    repoStatCmd,
 		"gc":      repoGcCmd,
-		"fsck":    repoFsckCmd,
 		"version": repoVersionCmd,
 		"verify":  repoVerifyCmd,
 		"migrate": repoMigrateCmd,
@@ -222,27 +221,6 @@ Version         string The repo version.
 				fmt.Fprintf(wtr, "Version:\t%s\n", stat.Version)
 			}
 
-			return nil
-		}),
-	},
-}
-
-var repoFsckCmd = &cmds.Command{
-	Status: cmds.Deprecated, // https://github.com/gocnpan/kubo/issues/6435
-	Helptext: cmds.HelpText{
-		Tagline: "Remove repo lockfiles.",
-		ShortDescription: `
-'ipfs repo fsck' is now a no-op.
-`,
-	},
-	NoRemote: true,
-	Run: func(req *cmds.Request, res cmds.ResponseEmitter, env cmds.Environment) error {
-		return cmds.EmitOnce(res, &MessageOutput{"`ipfs repo fsck` is deprecated and does nothing.\n"})
-	},
-	Type: MessageOutput{},
-	Encoders: cmds.EncoderMap{
-		cmds.Text: cmds.MakeTypedEncoder(func(req *cmds.Request, w io.Writer, out *MessageOutput) error {
-			fmt.Fprintf(w, out.Message)
 			return nil
 		}),
 	},

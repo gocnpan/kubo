@@ -8,7 +8,6 @@ import (
 	gopath "path"
 	"strconv"
 
-	coreiface "github.com/gocnpan/kubo/core/coreiface"
 	bstore "github.com/ipfs/boxo/blockstore"
 	chunker "github.com/ipfs/boxo/chunker"
 	"github.com/ipfs/boxo/files"
@@ -24,8 +23,9 @@ import (
 	"github.com/ipfs/go-cid"
 	ipld "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log"
+	coreiface "github.com/ipfs/kubo/core/coreiface"
 
-	"github.com/gocnpan/kubo/tracing"
+	"github.com/ipfs/kubo/tracing"
 )
 
 var log = logging.Logger("coreunix")
@@ -186,7 +186,7 @@ func (adder *Adder) PinRoot(ctx context.Context, root ipld.Node) error {
 		adder.tempRoot = rnk
 	}
 
-	err = adder.pinning.PinWithMode(ctx, rnk, pin.Recursive)
+	err = adder.pinning.PinWithMode(ctx, rnk, pin.Recursive, "")
 	if err != nil {
 		return err
 	}

@@ -1,4 +1,4 @@
-package main
+package kubo
 
 import (
 	"errors"
@@ -15,24 +15,24 @@ import (
 
 	multierror "github.com/hashicorp/go-multierror"
 
-	version "github.com/gocnpan/kubo"
-	utilmain "github.com/gocnpan/kubo/cmd/ipfs/util"
-	oldcmds "github.com/gocnpan/kubo/commands"
-	config "github.com/gocnpan/kubo/config"
-	cserial "github.com/gocnpan/kubo/config/serialize"
-	"github.com/gocnpan/kubo/core"
-	commands "github.com/gocnpan/kubo/core/commands"
-	"github.com/gocnpan/kubo/core/coreapi"
-	corehttp "github.com/gocnpan/kubo/core/corehttp"
-	options "github.com/gocnpan/kubo/core/coreiface/options"
-	corerepo "github.com/gocnpan/kubo/core/corerepo"
-	libp2p "github.com/gocnpan/kubo/core/node/libp2p"
-	nodeMount "github.com/gocnpan/kubo/fuse/node"
-	fsrepo "github.com/gocnpan/kubo/repo/fsrepo"
-	"github.com/gocnpan/kubo/repo/fsrepo/migrations"
-	"github.com/gocnpan/kubo/repo/fsrepo/migrations/ipfsfetcher"
 	cmds "github.com/ipfs/go-ipfs-cmds"
 	mprome "github.com/ipfs/go-metrics-prometheus"
+	version "github.com/ipfs/kubo"
+	utilmain "github.com/ipfs/kubo/cmd/ipfs/util"
+	oldcmds "github.com/ipfs/kubo/commands"
+	config "github.com/ipfs/kubo/config"
+	cserial "github.com/ipfs/kubo/config/serialize"
+	"github.com/ipfs/kubo/core"
+	commands "github.com/ipfs/kubo/core/commands"
+	"github.com/ipfs/kubo/core/coreapi"
+	corehttp "github.com/ipfs/kubo/core/corehttp"
+	options "github.com/ipfs/kubo/core/coreiface/options"
+	corerepo "github.com/ipfs/kubo/core/corerepo"
+	libp2p "github.com/ipfs/kubo/core/node/libp2p"
+	nodeMount "github.com/ipfs/kubo/fuse/node"
+	fsrepo "github.com/ipfs/kubo/repo/fsrepo"
+	"github.com/ipfs/kubo/repo/fsrepo/migrations"
+	"github.com/ipfs/kubo/repo/fsrepo/migrations/ipfsfetcher"
 	goprocess "github.com/jbenet/goprocess"
 	p2pcrypto "github.com/libp2p/go-libp2p/core/crypto"
 	pnet "github.com/libp2p/go-libp2p/core/pnet"
@@ -68,7 +68,6 @@ const (
 	routingOptionAutoClientKwd = "autoclient"
 	unencryptTransportKwd      = "disable-transport-encryption"
 	unrestrictedAPIAccessKwd   = "unrestricted-api"
-	writableKwd                = "writable"
 	enablePubSubKwd            = "enable-pubsub-experiment"
 	enableIPNSPubSubKwd        = "enable-namesys-pubsub"
 	enableMultiplexKwd         = "enable-mplex-experiment"
@@ -164,7 +163,6 @@ Headers.
 		cmds.StringOption(initProfileOptionKwd, "Configuration profiles to apply for --init. See ipfs init --help for more"),
 		cmds.StringOption(routingOptionKwd, "Overrides the routing option").WithDefault(routingOptionDefaultKwd),
 		cmds.BoolOption(mountKwd, "Mounts IPFS to the filesystem using FUSE (experimental)"),
-		cmds.BoolOption(writableKwd, "Enable legacy Gateway.Writable (REMOVED)"),
 		cmds.StringOption(ipfsMountKwd, "Path to the mountpoint for IPFS (if using --mount). Defaults to config setting."),
 		cmds.StringOption(ipnsMountKwd, "Path to the mountpoint for IPNS (if using --mount). Defaults to config setting."),
 		cmds.BoolOption(unrestrictedAPIAccessKwd, "Allow API access to unlisted hashes"),
@@ -426,7 +424,7 @@ func daemonFunc(req *cmds.Request, re cmds.ResponseEmitter, env cmds.Environment
 	case routingOptionNoneKwd:
 		ncfg.Routing = libp2p.NilRouterOption
 	case routingOptionCustomKwd:
-		if cfg.Routing.AcceleratedDHTClient {
+		if cfg.Routing.AcceleratedDHTClient.WithDefault(config.DefaultAcceleratedDHTClient) {
 			return fmt.Errorf("Routing.AcceleratedDHTClient option is set even tho Routing.Type is custom, using custom .AcceleratedDHTClient needs to be set on DHT routers individually")
 		}
 		ncfg.Routing = libp2p.ConstructDelegatedRouting(
@@ -803,15 +801,6 @@ func serveHTTPGateway(req *cmds.Request, cctx *oldcmds.Context) (<-chan error, e
 		return nil, fmt.Errorf("serveHTTPGateway: GetConfig() failed: %s", err)
 	}
 
-	writable, writableOptionFound := req.Options[writableKwd].(bool)
-	if !writableOptionFound {
-		writable = cfg.Gateway.Writable.WithDefault(false)
-	}
-
-	if writable {
-		log.Fatalf("Support for Gateway.Writable and --writable has been REMOVED. Please remove it from your config file or CLI. Modern replacement tracked in https://github.com/ipfs/specs/issues/375")
-	}
-
 	listeners, err := sockets.TakeListeners("io.ipfs.gateway")
 	if err != nil {
 		return nil, fmt.Errorf("serveHTTPGateway: socket activation failed: %s", err)
@@ -861,7 +850,6 @@ func serveHTTPGateway(req *cmds.Request, cctx *oldcmds.Context) (<-chan error, e
 		corehttp.GatewayOption("/ipfs", "/ipns"),
 		corehttp.VersionOption(),
 		corehttp.CheckVersionOption(),
-		corehttp.CommandsROOption(cmdctx),
 	}
 
 	if cfg.Experimental.P2pHttpProxy {
@@ -874,10 +862,6 @@ func serveHTTPGateway(req *cmds.Request, cctx *oldcmds.Context) (<-chan error, e
 
 	if len(cfg.Gateway.RootRedirect) > 0 {
 		opts = append(opts, corehttp.RedirectOption("", cfg.Gateway.RootRedirect))
-	}
-
-	if len(cfg.Gateway.PathPrefixes) > 0 {
-		log.Fatal("Support for custom Gateway.PathPrefixes was removed: https://github.com/ipfs/go-ipfs/issues/7702")
 	}
 
 	node, err := cctx.ConstructNode()
@@ -945,10 +929,6 @@ func serveTrustlessGatewayOverLibp2p(cctx *oldcmds.Context) (<-chan error, error
 	h := p2phttp.Host{
 		StreamHost: node.PeerHost,
 	}
-
-	tmpProtocol := protocol.ID("/kubo/delete-me")
-	h.SetHTTPHandler(tmpProtocol, http.NotFoundHandler())
-	h.WellKnownHandler.RemoveProtocolMeta(tmpProtocol)
 
 	h.WellKnownHandler.AddProtocolMeta(gatewayProtocolID, p2phttp.ProtocolMeta{Path: "/"})
 	h.ServeMux = http.NewServeMux()

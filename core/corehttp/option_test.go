@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	version "github.com/gocnpan/kubo"
+	version "github.com/ipfs/kubo"
 )
 
 type testcasecheckversion struct {

@@ -46,17 +46,17 @@ import (
 	ma "github.com/multiformats/go-multiaddr"
 	madns "github.com/multiformats/go-multiaddr-dns"
 
-	"github.com/gocnpan/kubo/config"
-	"github.com/gocnpan/kubo/core/node"
-	"github.com/gocnpan/kubo/core/node/libp2p"
-	"github.com/gocnpan/kubo/fuse/mount"
-	"github.com/gocnpan/kubo/p2p"
-	"github.com/gocnpan/kubo/repo"
-	irouting "github.com/gocnpan/kubo/routing"
 	"github.com/ipfs/boxo/bootstrap"
 	"github.com/ipfs/boxo/namesys"
 	ipnsrp "github.com/ipfs/boxo/namesys/republisher"
 	"github.com/ipfs/boxo/peering"
+	"github.com/ipfs/kubo/config"
+	"github.com/ipfs/kubo/core/node"
+	"github.com/ipfs/kubo/core/node/libp2p"
+	"github.com/ipfs/kubo/fuse/mount"
+	"github.com/ipfs/kubo/p2p"
+	"github.com/ipfs/kubo/repo"
+	irouting "github.com/ipfs/kubo/routing"
 )
 
 var log = logging.Logger("core")

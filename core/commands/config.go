@@ -9,13 +9,13 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/gocnpan/kubo/core/commands/cmdenv"
-	"github.com/gocnpan/kubo/repo"
-	"github.com/gocnpan/kubo/repo/fsrepo"
+	"github.com/ipfs/kubo/core/commands/cmdenv"
+	"github.com/ipfs/kubo/repo"
+	"github.com/ipfs/kubo/repo/fsrepo"
 
 	"github.com/elgris/jsondiff"
-	config "github.com/gocnpan/kubo/config"
 	cmds "github.com/ipfs/go-ipfs-cmds"
+	config "github.com/ipfs/kubo/config"
 )
 
 // ConfigUpdateOutput is config profile apply command's output

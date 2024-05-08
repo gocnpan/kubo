@@ -4,9 +4,9 @@ import (
 	"context"
 	"errors"
 
-	coreiface "github.com/gocnpan/kubo/core/coreiface"
-	caopts "github.com/gocnpan/kubo/core/coreiface/options"
-	"github.com/gocnpan/kubo/tracing"
+	coreiface "github.com/ipfs/kubo/core/coreiface"
+	caopts "github.com/ipfs/kubo/core/coreiface/options"
+	"github.com/ipfs/kubo/tracing"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	peer "github.com/libp2p/go-libp2p/core/peer"
 	routing "github.com/libp2p/go-libp2p/core/routing"

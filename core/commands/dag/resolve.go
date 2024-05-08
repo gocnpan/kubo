@@ -1,9 +1,9 @@
 package dagcmd
 
 import (
-	"github.com/gocnpan/kubo/core/commands/cmdenv"
-	"github.com/gocnpan/kubo/core/commands/cmdutils"
 	"github.com/ipfs/boxo/path"
+	"github.com/ipfs/kubo/core/commands/cmdenv"
+	"github.com/ipfs/kubo/core/commands/cmdutils"
 
 	cmds "github.com/ipfs/go-ipfs-cmds"
 )

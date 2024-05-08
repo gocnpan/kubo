@@ -1,4 +1,4 @@
-package main
+package kubo
 
 import (
 	"context"
@@ -12,16 +12,16 @@ import (
 
 	unixfs "github.com/ipfs/boxo/ipld/unixfs"
 	"github.com/ipfs/boxo/path"
-	assets "github.com/gocnpan/kubo/assets"
-	oldcmds "github.com/gocnpan/kubo/commands"
-	core "github.com/gocnpan/kubo/core"
-	"github.com/gocnpan/kubo/core/commands"
-	fsrepo "github.com/gocnpan/kubo/repo/fsrepo"
+	assets "github.com/ipfs/kubo/assets"
+	oldcmds "github.com/ipfs/kubo/commands"
+	core "github.com/ipfs/kubo/core"
+	"github.com/ipfs/kubo/core/commands"
+	fsrepo "github.com/ipfs/kubo/repo/fsrepo"
 
 	"github.com/ipfs/boxo/files"
-	config "github.com/gocnpan/kubo/config"
-	options "github.com/gocnpan/kubo/core/coreiface/options"
 	cmds "github.com/ipfs/go-ipfs-cmds"
+	config "github.com/ipfs/kubo/config"
+	options "github.com/ipfs/kubo/core/coreiface/options"
 )
 
 const (
@@ -252,7 +252,7 @@ func initializeIpnsKeyspace(repoRoot string) error {
 
 	// pin recursively because this might already be pinned
 	// and doing a direct pin would throw an error in that case
-	err = nd.Pinning.Pin(ctx, emptyDir, true)
+	err = nd.Pinning.Pin(ctx, emptyDir, true, "")
 	if err != nil {
 		return err
 	}

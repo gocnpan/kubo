@@ -1,7 +1,7 @@
 package plugin
 
 import (
-	"github.com/gocnpan/kubo/core"
+	"github.com/ipfs/kubo/core"
 	"go.uber.org/fx"
 )
 

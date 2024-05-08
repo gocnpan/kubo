@@ -1,15 +1,15 @@
 package node
 
 import (
-	config "github.com/gocnpan/kubo/config"
 	blockstore "github.com/ipfs/boxo/blockstore"
 	"github.com/ipfs/go-datastore"
+	config "github.com/ipfs/kubo/config"
 	"go.uber.org/fx"
 
-	"github.com/gocnpan/kubo/core/node/helpers"
-	"github.com/gocnpan/kubo/repo"
-	"github.com/gocnpan/kubo/thirdparty/verifbs"
 	"github.com/ipfs/boxo/filestore"
+	"github.com/ipfs/kubo/core/node/helpers"
+	"github.com/ipfs/kubo/repo"
+	"github.com/ipfs/kubo/thirdparty/verifbs"
 )
 
 // RepoConfig loads configuration from the repo
@@ -27,17 +27,14 @@ func Datastore(repo repo.Repo) datastore.Datastore {
 type BaseBlocks blockstore.Blockstore
 
 // BaseBlockstoreCtor creates cached blockstore backed by the provided datastore
-func BaseBlockstoreCtor(cacheOpts blockstore.CacheOpts, nilRepo bool, hashOnRead bool) func(mctx helpers.MetricsCtx, repo repo.Repo, lc fx.Lifecycle) (bs BaseBlocks, err error) {
+func BaseBlockstoreCtor(cacheOpts blockstore.CacheOpts, hashOnRead bool) func(mctx helpers.MetricsCtx, repo repo.Repo, lc fx.Lifecycle) (bs BaseBlocks, err error) {
 	return func(mctx helpers.MetricsCtx, repo repo.Repo, lc fx.Lifecycle) (bs BaseBlocks, err error) {
 		// hash security
 		bs = blockstore.NewBlockstore(repo.Datastore())
 		bs = &verifbs.VerifBS{Blockstore: bs}
-
-		if !nilRepo {
-			bs, err = blockstore.CachedBlockstore(helpers.LifecycleCtx(mctx, lc), bs, cacheOpts)
-			if err != nil {
-				return nil, err
-			}
+		bs, err = blockstore.CachedBlockstore(helpers.LifecycleCtx(mctx, lc), bs, cacheOpts)
+		if err != nil {
+			return nil, err
 		}
 
 		bs = blockstore.NewIdStore(bs)

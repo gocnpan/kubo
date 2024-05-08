@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/gocnpan/kubo/config"
-	"github.com/gocnpan/kubo/test/cli/harness"
-	"github.com/gocnpan/kubo/test/cli/testutils"
+	"github.com/ipfs/kubo/config"
+	"github.com/ipfs/kubo/test/cli/harness"
+	"github.com/ipfs/kubo/test/cli/testutils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

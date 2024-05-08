@@ -17,9 +17,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gocnpan/kubo/config"
-	serial "github.com/gocnpan/kubo/config/serialize"
 	logging "github.com/ipfs/go-log/v2"
+	"github.com/ipfs/kubo/config"
+	serial "github.com/ipfs/kubo/config/serialize"
 	"github.com/libp2p/go-libp2p/core/peer"
 	rcmgr "github.com/libp2p/go-libp2p/p2p/host/resource-manager"
 	"github.com/multiformats/go-multiaddr"
@@ -208,6 +208,7 @@ func (n *Node) Init(ipfsArgs ...string) *Node {
 		cfg.Addresses.Gateway = []string{n.GatewayListenAddr.String()}
 		cfg.Swarm.DisableNatPortMap = true
 		cfg.Discovery.MDNS.Enabled = n.EnableMDNS
+		cfg.Routing.LoopbackAddressesOnLanDHT = config.True
 	})
 	return n
 }

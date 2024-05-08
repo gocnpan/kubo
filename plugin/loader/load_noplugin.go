@@ -6,7 +6,7 @@ package loader
 import (
 	"errors"
 
-	iplugin "github.com/gocnpan/kubo/plugin"
+	iplugin "github.com/ipfs/kubo/plugin"
 )
 
 func init() {

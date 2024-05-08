@@ -7,11 +7,9 @@ const (
 	DefaultExposeRoutingAPI      = false
 )
 
-// 网关配置
-
 type GatewaySpec struct {
 	// Paths is explicit list of path prefixes that should be handled by
-	// this gateway. Example: `["/ipfs", "/ipns", "/api"]`
+	// this gateway. Example: `["/ipfs", "/ipns"]`
 	Paths []string
 
 	// UseSubdomains indicates whether or not this gateway uses subdomains
@@ -41,9 +39,6 @@ type GatewaySpec struct {
 
 // Gateway contains options for the HTTP gateway server.
 type Gateway struct {
-	// 文件下载 网速限制器 默认 500 MB
-	FileRateLimitation string `json:",omitempty"`
-
 	// HTTPHeaders configures the headers that should be returned by this
 	// gateway.
 	HTTPHeaders map[string][]string // HTTP headers to return with the gateway
@@ -51,15 +46,6 @@ type Gateway struct {
 	// RootRedirect is the path to which requests to `/` on this gateway
 	// should be redirected.
 	RootRedirect string
-
-	// REMOVED: modern replacement tracked in https://github.com/ipfs/specs/issues/375
-	Writable Flag `json:",omitempty"`
-
-	// PathPrefixes was removed: https://github.com/ipfs/go-ipfs/issues/7702
-	PathPrefixes []string
-
-	// FIXME: Not yet implemented: https://github.com/gocnpan/kubo/issues/8059
-	APICommands []string
 
 	// NoFetch configures the gateway to _not_ fetch blocks in response to
 	// requests.

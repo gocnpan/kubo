@@ -5,8 +5,8 @@ package iface
 import (
 	"context"
 
-	"github.com/gocnpan/kubo/core/coreiface/options"
 	"github.com/ipfs/boxo/path"
+	"github.com/ipfs/kubo/core/coreiface/options"
 
 	ipld "github.com/ipfs/go-ipld-format"
 )
@@ -33,9 +33,6 @@ type CoreAPI interface {
 
 	// Object returns an implementation of Object API
 	Object() ObjectAPI
-
-	// Dht returns an implementation of Dht API
-	Dht() DhtAPI
 
 	// Swarm returns an implementation of Swarm API
 	Swarm() SwarmAPI
