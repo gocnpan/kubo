@@ -5,11 +5,11 @@ import (
 	"context"
 	"testing"
 
+	"github.com/gocnpan/kubo/core"
+	coremock "github.com/gocnpan/kubo/core/mock"
+	"github.com/gocnpan/kubo/core/node/libp2p"
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/kubo/core"
-	coremock "github.com/ipfs/kubo/core/mock"
-	"github.com/ipfs/kubo/core/node/libp2p"
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
 )
 

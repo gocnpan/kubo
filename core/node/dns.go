@@ -4,8 +4,8 @@ import (
 	"math"
 	"time"
 
+	config "github.com/gocnpan/kubo/config"
 	"github.com/ipfs/boxo/gateway"
-	config "github.com/ipfs/kubo/config"
 	doh "github.com/libp2p/go-doh-resolver"
 	madns "github.com/multiformats/go-multiaddr-dns"
 )

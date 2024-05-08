@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
+	coreiface "github.com/gocnpan/kubo/core/coreiface"
 	"github.com/ipfs/boxo/path"
-	coreiface "github.com/ipfs/kubo/core/coreiface"
 
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 	ipld "github.com/ipfs/go-ipld-format"

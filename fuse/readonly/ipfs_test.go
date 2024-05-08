@@ -18,9 +18,9 @@ import (
 
 	"bazil.org/fuse"
 
-	core "github.com/ipfs/kubo/core"
-	coreapi "github.com/ipfs/kubo/core/coreapi"
-	coremock "github.com/ipfs/kubo/core/mock"
+	core "github.com/gocnpan/kubo/core"
+	coreapi "github.com/gocnpan/kubo/core/coreapi"
+	coremock "github.com/gocnpan/kubo/core/mock"
 
 	fstest "bazil.org/fuse/fs/fstestutil"
 	chunker "github.com/ipfs/boxo/chunker"

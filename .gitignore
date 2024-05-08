@@ -33,3 +33,7 @@ docs/examples/go-ipfs-as-a-library/example-folder/Qm*
 /parts
 /stage
 /prime
+
+/cmd/ipfs/ipfs.*
+/test/build/ipfs.*
+/test/build/data

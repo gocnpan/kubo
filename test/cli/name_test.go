@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/gocnpan/kubo/core/commands/name"
+	"github.com/gocnpan/kubo/test/cli/harness"
 	"github.com/ipfs/boxo/ipns"
-	"github.com/ipfs/kubo/core/commands/name"
-	"github.com/ipfs/kubo/test/cli/harness"
 	"github.com/stretchr/testify/require"
 )
 

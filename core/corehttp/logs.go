@@ -5,8 +5,8 @@ import (
 	"net"
 	"net/http"
 
+	core "github.com/gocnpan/kubo/core"
 	lwriter "github.com/ipfs/go-log/writer"
-	core "github.com/ipfs/kubo/core"
 )
 
 type writeErrNotifier struct {

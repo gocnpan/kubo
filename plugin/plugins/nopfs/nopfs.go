@@ -4,12 +4,12 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/gocnpan/kubo/config"
+	"github.com/gocnpan/kubo/core"
+	"github.com/gocnpan/kubo/core/node"
+	"github.com/gocnpan/kubo/plugin"
 	"github.com/ipfs-shipyard/nopfs"
 	"github.com/ipfs-shipyard/nopfs/ipfs"
-	"github.com/ipfs/kubo/config"
-	"github.com/ipfs/kubo/core"
-	"github.com/ipfs/kubo/core/node"
-	"github.com/ipfs/kubo/plugin"
 	"go.uber.org/fx"
 )
 

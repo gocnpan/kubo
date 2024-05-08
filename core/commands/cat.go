@@ -6,13 +6,13 @@ import (
 	"io"
 	"os"
 
-	"github.com/ipfs/kubo/core/commands/cmdenv"
-	"github.com/ipfs/kubo/core/commands/cmdutils"
+	"github.com/gocnpan/kubo/core/commands/cmdenv"
+	"github.com/gocnpan/kubo/core/commands/cmdutils"
 
 	"github.com/cheggaaa/pb"
+	iface "github.com/gocnpan/kubo/core/coreiface"
 	"github.com/ipfs/boxo/files"
 	cmds "github.com/ipfs/go-ipfs-cmds"
-	iface "github.com/ipfs/kubo/core/coreiface"
 )
 
 const (
