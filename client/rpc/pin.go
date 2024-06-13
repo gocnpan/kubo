@@ -3,6 +3,7 @@ package rpc
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"io"
 	"strings"
 
@@ -10,7 +11,6 @@ import (
 	caopts "github.com/gocnpan/kubo/core/coreiface/options"
 	"github.com/ipfs/boxo/path"
 	"github.com/ipfs/go-cid"
-	"github.com/pkg/errors"
 )
 
 type PinAPI HttpApi
