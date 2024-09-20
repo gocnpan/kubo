@@ -287,7 +287,7 @@ documented in `ipfs config profile --help`.
 
   > [!NOTE]
   > This profile will become the new implicit default, provided for testing purposes.
-  > Follow [kubo#4143](https://github.com/ipfs/kubo/issues/4143) for more details.
+  > Follow [kubo#4143](https://github.com/gocnpan/kubo/issues/4143) for more details.
 
 ## Types
 
@@ -564,13 +564,13 @@ field can take one of two values:
 * `enabled` - Enable the V1+V2 service (unless the node determines that it,
   itself, isn't reachable by the public internet).
 * `legacy-v1` - Same as `enabled` but only V1 service is enabled. Used for testing
-  during as few releases as we [transition to V2](https://github.com/ipfs/kubo/issues/10091), will be removed in the future.
+  during as few releases as we [transition to V2](https://github.com/gocnpan/kubo/issues/10091), will be removed in the future.
 * `disabled` - Disable the service.
 
 Additional modes may be added in the future.
 
 > [!IMPORTANT]
-> We are in the progress of [rolling out AutoNAT V2](https://github.com/ipfs/kubo/issues/10091).
+> We are in the progress of [rolling out AutoNAT V2](https://github.com/gocnpan/kubo/issues/10091).
 > Right now, by default, a publicly diallable Kubo provides both V1 and V2 service to other peers,
 > but only V1 is used by Kubo as a client. In a future release we will remove V1 and switch client to use V2.
 
@@ -753,7 +753,7 @@ Toggle and configure experimental features of Kubo. Experimental features are li
 
 Options for the HTTP gateway.
 
-**NOTE:** support for `/api/v0` under the gateway path is now deprecated. It will be removed in future versions: https://github.com/ipfs/kubo/issues/10312.
+**NOTE:** support for `/api/v0` under the gateway path is now deprecated. It will be removed in future versions: https://github.com/gocnpan/kubo/issues/10312.
 
 ### `Gateway.NoFetch`
 
@@ -803,7 +803,7 @@ as an [HTTP `/routing/v1`](https://specs.ipfs.tech/routing/http-routing-v1/) end
 Use reverse proxy to expose it on a different hostname.
 
 This endpoint can be used by other Kubo instances, as illustrated in
-[`delegated_routing_v1_http_proxy_test.go`](https://github.com/ipfs/kubo/blob/master/test/cli/delegated_routing_v1_http_proxy_test.go).
+[`delegated_routing_v1_http_proxy_test.go`](https://github.com/gocnpan/kubo/blob/master/test/cli/delegated_routing_v1_http_proxy_test.go).
 Kubo will filter out routing results which are not actionable, for example, all
 graphsync providers will be skipped. If you need a generic pass-through, see
 standalone router implementation named [someguy](https://github.com/ipfs/someguy).
@@ -830,11 +830,11 @@ Type: `string` (url)
 
 ### `Gateway.FastDirIndexThreshold`
 
-**REMOVED**: this option is [no longer necessary](https://github.com/ipfs/kubo/pull/9481). Ignored since  [Kubo 0.18](https://github.com/ipfs/kubo/blob/master/docs/changelogs/v0.18.md).
+**REMOVED**: this option is [no longer necessary](https://github.com/gocnpan/kubo/pull/9481). Ignored since  [Kubo 0.18](https://github.com/gocnpan/kubo/blob/master/docs/changelogs/v0.18.md).
 
 ### `Gateway.Writable`
 
-**REMOVED**: this option no longer available as of [Kubo 0.20](https://github.com/ipfs/kubo/blob/master/docs/changelogs/v0.20.md).
+**REMOVED**: this option no longer available as of [Kubo 0.20](https://github.com/gocnpan/kubo/blob/master/docs/changelogs/v0.20.md).
 
 We are working on developing a modern replacement. To support our efforts, please leave a comment describing your use case in [ipfs/specs#375](https://github.com/ipfs/specs/issues/375).
 
@@ -1185,7 +1185,7 @@ Maximum duration for which entries are valid in the name system cache. Applied
 to everything under `/ipns/` namespace, allows you to cap
 the [Time-To-Live (TTL)](https://specs.ipfs.tech/ipns/ipns-record/#ttl-uint64) of
 [IPNS Records](https://specs.ipfs.tech/ipns/ipns-record/)
-AND also DNSLink TXT records (when DoH-specific [`DNS.MaxCacheTTL`](https://github.com/ipfs/kubo/blob/master/docs/config.md#dnsmaxcachettl)
+AND also DNSLink TXT records (when DoH-specific [`DNS.MaxCacheTTL`](https://github.com/gocnpan/kubo/blob/master/docs/config.md#dnsmaxcachettl)
 is not set to a lower value).
 
 When `Ipns.MaxCacheTTL` is set, it defines the upper bound limit of how long a
@@ -1351,7 +1351,7 @@ Type: `duration`
 
 ## `Pubsub`
 
-**DEPRECATED**: See [#9717](https://github.com/ipfs/kubo/issues/9717)
+**DEPRECATED**: See [#9717](https://github.com/gocnpan/kubo/issues/9717)
 
 Pubsub configures the `ipfs pubsub` subsystem. To use, it must be enabled by
 passing the `--enable-pubsub-experiment` flag to the daemon
@@ -1359,7 +1359,7 @@ or via the `Pubsub.Enabled` flag below.
 
 ### `Pubsub.Enabled`
 
-**DEPRECATED**: See [#9717](https://github.com/ipfs/kubo/issues/9717)
+**DEPRECATED**: See [#9717](https://github.com/gocnpan/kubo/issues/9717)
 
 Enables the pubsub system.
 
@@ -1369,7 +1369,7 @@ Type: `flag`
 
 ### `Pubsub.Router`
 
-**DEPRECATED**: See [#9717](https://github.com/ipfs/kubo/issues/9717)
+**DEPRECATED**: See [#9717](https://github.com/gocnpan/kubo/issues/9717)
 
 Sets the default router used by pubsub to route messages to peers. This can be one of:
 
@@ -1386,7 +1386,7 @@ Type: `string` (one of `"floodsub"`, `"gossipsub"`, or `""` (apply default))
 
 ### `Pubsub.DisableSigning`
 
-**DEPRECATED**: See [#9717](https://github.com/ipfs/kubo/issues/9717)
+**DEPRECATED**: See [#9717](https://github.com/gocnpan/kubo/issues/9717)
 
 Disables message signing and signature verification. Enable this option if
 you're operating in a completely trusted network.
@@ -1401,7 +1401,7 @@ Type: `bool`
 
 ### `Pubsub.SeenMessagesTTL`
 
-**DEPRECATED**: See [#9717](https://github.com/ipfs/kubo/issues/9717)
+**DEPRECATED**: See [#9717](https://github.com/gocnpan/kubo/issues/9717)
 
 Controls the time window within which duplicate messages, identified by Message
 ID, will be identified and won't be emitted again.
@@ -1422,7 +1422,7 @@ Type: `optionalDuration`
 
 ### `Pubsub.SeenMessagesStrategy`
 
-**DEPRECATED**: See [#9717](https://github.com/ipfs/kubo/issues/9717)
+**DEPRECATED**: See [#9717](https://github.com/gocnpan/kubo/issues/9717)
 
 Determines how the time-to-live (TTL) countdown for deduplicating Pubsub
 messages is calculated.
@@ -2355,7 +2355,7 @@ Type: `priority`
 
 ### `Swarm.Transports.Multiplexers.Mplex`
 
-**REMOVED**: See https://github.com/ipfs/kubo/issues/9958
+**REMOVED**: See https://github.com/gocnpan/kubo/issues/9958
 
 Support for Mplex has been [removed from Kubo and go-libp2p](https://github.com/libp2p/specs/issues/553).
 Please remove this option from your config.
