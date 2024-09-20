@@ -6,8 +6,8 @@ ENV SRC_DIR /kubo
 
 # Download packages first so they can be cached.
 COPY go.mod go.sum $SRC_DIR/
-# RUN cd $SRC_DIR \
-#   && go mod download
+RUN cd $SRC_DIR \
+  && go mod download
 
 COPY . $SRC_DIR
 
@@ -44,7 +44,7 @@ RUN set -eux; \
 	rm -rf /var/lib/apt/lists/*
 
 # Now comes the actual target image, which aims to be as small as possible.
-FROM busybox:1.36.1-glibc
+FROM busybox:stable-glibc
 
 # Get the ipfs binary, entrypoint script, and TLS CAs from the build container.
 ENV SRC_DIR /kubo

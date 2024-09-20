@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"os/exec"
@@ -12,7 +13,7 @@ import (
 	"github.com/gocnpan/kubo/thirdparty/unit"
 
 	config "github.com/gocnpan/kubo/config"
-	random "github.com/jbenet/go-random"
+	random "github.com/ipfs/go-test/random"
 )
 
 var (
@@ -59,7 +60,7 @@ func benchmarkAdd(amount int64) (*testing.BenchmarkResult, error) {
 				}
 			}
 
-			initCmd := exec.Command("ipfs", "init", "-b=2048")
+			initCmd := exec.Command("ipfs", "init")
 			setupCmd(initCmd)
 			if err := initCmd.Run(); err != nil {
 				benchmarkError = err
@@ -74,7 +75,11 @@ func benchmarkAdd(amount int64) (*testing.BenchmarkResult, error) {
 			}
 			defer os.Remove(f.Name())
 
-			if err := random.WritePseudoRandomBytes(amount, f, seed); err != nil {
+			randReader := &io.LimitedReader{
+				R: random.NewSeededRand(seed),
+				N: amount,
+			}
+			if _, err := io.Copy(f, randReader); err != nil {
 				benchmarkError = err
 				b.Fatal(err)
 			}
