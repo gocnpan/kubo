@@ -1,4 +1,4 @@
-g use 1.22.3
+g use 1.22.8
 
 rm cmd/ipfs/ipfs.amd
 
