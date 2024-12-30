@@ -8,6 +8,7 @@ import (
 	pluginipldgit "github.com/gocnpan/kubo/plugin/plugins/git"
 	pluginlevelds "github.com/gocnpan/kubo/plugin/plugins/levelds"
 	pluginnopfs "github.com/gocnpan/kubo/plugin/plugins/nopfs"
+	pluginpebbleds "github.com/gocnpan/kubo/plugin/plugins/pebbleds"
 	pluginpeerlog "github.com/gocnpan/kubo/plugin/plugins/peerlog"
 )
 
@@ -21,6 +22,7 @@ func init() {
 	Preload(pluginbadgerds.Plugins...)
 	Preload(pluginflatfs.Plugins...)
 	Preload(pluginlevelds.Plugins...)
+	Preload(pluginpebbleds.Plugins...)
 	Preload(pluginpeerlog.Plugins...)
 	Preload(pluginfxtest.Plugins...)
 	Preload(pluginnopfs.Plugins...)

@@ -21,7 +21,6 @@ bin/tmp
 bin/gocovmerge
 bin/cover
 
-cmd/ipfs/ipfs*
 
 vendor
 .tarball

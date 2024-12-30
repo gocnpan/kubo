@@ -1,6 +1,6 @@
 # 代码说明
 
-当前代码在分支`release-v0.25.0`基础上直接将`ipfs/kubo`分支`v0.28.0`代码覆盖替换
+当前代码在分支`release-v0.30.0`基础上直接将`ipfs/kubo`分支`v0.32.0`代码覆盖替换
 
 其中影响网关响应速度的代码`corehttp.HostnameOption()`需要屏蔽
 ```go
@@ -12,7 +12,6 @@
 		corehttp.CheckVersionOption(),
 	}
 ```
-# kubo
 
 <h1 align="center">
   <br>

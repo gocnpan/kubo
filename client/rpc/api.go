@@ -17,13 +17,13 @@ import (
 	ipfs "github.com/gocnpan/kubo"
 	iface "github.com/gocnpan/kubo/core/coreiface"
 	caopts "github.com/gocnpan/kubo/core/coreiface/options"
+	"github.com/gocnpan/kubo/misc/fsutil"
 	"github.com/ipfs/boxo/ipld/merkledag"
 	"github.com/ipfs/go-cid"
 	legacy "github.com/ipfs/go-ipld-legacy"
 	dagpb "github.com/ipld/go-codec-dagpb"
 	_ "github.com/ipld/go-ipld-prime/codec/dagcbor"
 	"github.com/ipld/go-ipld-prime/node/basicnode"
-	"github.com/mitchellh/go-homedir"
 	ma "github.com/multiformats/go-multiaddr"
 	manet "github.com/multiformats/go-multiaddr/net"
 )
@@ -82,7 +82,7 @@ func NewPathApi(ipfspath string) (*HttpApi, error) {
 
 // ApiAddr reads api file in specified ipfs path.
 func ApiAddr(ipfspath string) (ma.Multiaddr, error) {
-	baseDir, err := homedir.Expand(ipfspath)
+	baseDir, err := fsutil.ExpandHome(ipfspath)
 	if err != nil {
 		return nil, err
 	}

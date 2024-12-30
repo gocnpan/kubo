@@ -4,7 +4,7 @@ import (
 	"os"
 
 	config "github.com/gocnpan/kubo/config"
-	homedir "github.com/mitchellh/go-homedir"
+	"github.com/gocnpan/kubo/misc/fsutil"
 )
 
 // BestKnownPath returns the best known fsrepo path. If the ENV override is
@@ -15,7 +15,7 @@ func BestKnownPath() (string, error) {
 	if os.Getenv(config.EnvDir) != "" {
 		ipfsPath = os.Getenv(config.EnvDir)
 	}
-	ipfsPath, err := homedir.Expand(ipfsPath)
+	ipfsPath, err := fsutil.ExpandHome(ipfsPath)
 	if err != nil {
 		return "", err
 	}

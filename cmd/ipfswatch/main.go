@@ -16,12 +16,12 @@ import (
 	core "github.com/gocnpan/kubo/core"
 	coreapi "github.com/gocnpan/kubo/core/coreapi"
 	corehttp "github.com/gocnpan/kubo/core/corehttp"
+	"github.com/gocnpan/kubo/misc/fsutil"
 	fsrepo "github.com/gocnpan/kubo/repo/fsrepo"
 
 	fsnotify "github.com/fsnotify/fsnotify"
 	"github.com/ipfs/boxo/files"
 	process "github.com/jbenet/goprocess"
-	homedir "github.com/mitchellh/go-homedir"
 )
 
 var (
@@ -57,7 +57,7 @@ func run(ipfsPath, watchPath string) error {
 	proc := process.WithParent(process.Background())
 	log.Printf("running IPFSWatch on '%s' using repo at '%s'...", watchPath, ipfsPath)
 
-	ipfsPath, err := homedir.Expand(ipfsPath)
+	ipfsPath, err := fsutil.ExpandHome(ipfsPath)
 	if err != nil {
 		return err
 	}

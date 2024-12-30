@@ -9,6 +9,7 @@ iplddagjose github.com/gocnpan/kubo/plugin/plugins/dagjose *
 badgerds github.com/gocnpan/kubo/plugin/plugins/badgerds *
 flatfs github.com/gocnpan/kubo/plugin/plugins/flatfs *
 levelds github.com/gocnpan/kubo/plugin/plugins/levelds *
+pebbleds github.com/gocnpan/kubo/plugin/plugins/pebbleds *
 peerlog github.com/gocnpan/kubo/plugin/plugins/peerlog *
 fxtest github.com/gocnpan/kubo/plugin/plugins/fxtest *
 nopfs github.com/gocnpan/kubo/plugin/plugins/nopfs *
