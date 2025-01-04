@@ -1,5 +1,3 @@
-g use 1.22.8
-
 rm cmd/ipfs/ipfs.arm64
 
 export GOOS=android
@@ -9,5 +7,5 @@ export GOARCH=arm64
 export GOARM=7
 
 go build "-trimpath" \
- "-trimpath" -ldflags="-X "github.com/gocnpan/kubo".CurrentCommit=yzv0280" \
+ -ldflags="-checklinkname=0 -X "github.com/gocnpan/kubo".CurrentCommit=yzv0320" \
  -o "cmd/ipfs/ipfs.arm64" "github.com/gocnpan/kubo/cmd/ipfs"

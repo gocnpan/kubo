@@ -1,4 +1,4 @@
-g use 1.23.3
+g use 1.23.4
 export CGO_ENABLED=1
 export CC=x86_64-w64-mingw32-gcc
 export GOOS=windows

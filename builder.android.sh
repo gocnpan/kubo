@@ -1,3 +1,5 @@
+g use 1.23.4
+
 sh builder.android.amd.sh
 
 sh builder.android.amd64.sh
