@@ -1,5 +1,3 @@
-g use 1.22.8
-
 rm cmd/ipfs/ipfs.arm64
 
 export GOOS=android
